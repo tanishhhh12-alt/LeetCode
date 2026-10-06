@@ -14,7 +14,7 @@ class Solution {
             count[san[i]]--;
             
         }
-        return count[0] + count[1];
+        return count[1] +count[0];
 
     }
 }
