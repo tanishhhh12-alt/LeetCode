@@ -1,21 +1,20 @@
 class Solution {
     public int countStudents(int[] s, int[] san) {
-        Queue<Integer> q = new LinkedList<>();
-        for(int i=0;i<s.length;i++){
-            q.offer(s[i]);
+        int[] count = new int[2];
+
+        for (int i = 0; i < s.length; i++) {
+            count[s[i]]++;
         }
-        int index=0;
-        int  count =0;
-        while(!q.isEmpty() && count< q.size()){
-            if(q.peek() == san[index]){
-                q.poll();
-                index++;
-                count=0;}
-            else{
-                q.offer(q.poll());
-                count++;
+
+        for (int i = 0; i < san.length; i++) {
+            if (count[san[i]]== 0) {
+                break;
+
+            }
+            count[san[i]]--;
+            
         }
-        }
-        return q.size();
+        return count[0] + count[1];
+
     }
 }
