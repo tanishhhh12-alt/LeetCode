@@ -1,20 +1,17 @@
 class Solution {
     public int reductionOperations(int[] nums) {
-        int ans=0;
         Arrays.sort(nums);
+       int n = nums.length;
+        int ans =0;
         
-        HashMap<Integer,Integer> mp = new HashMap<>();
-        for(int i =0;i<nums.length;i++){
-            int curr = nums[i];
-            mp.put(curr,mp.getOrDefault(curr,0)+1);
-        }
-        if(mp.size() == 1){
-            return 0;
-        }
 
-        if(mp.size() == nums.length){
-            return nums.length;
+        for(int i =n-1;i>0;i--){
+            if(nums[i] != nums[i-1]){
+                ans+=n-i;
+            }
+           
+            
         }
-        return mp.size() +1;
+        return ans;
     }
 }
