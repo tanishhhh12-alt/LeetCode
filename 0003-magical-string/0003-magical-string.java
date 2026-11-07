@@ -1,7 +1,7 @@
 class Solution {
     public int magicalString(int n) {
+        if(n<0) return 0;
         
-        if(n<=3) return 1;
 
         int[] arr = new int[n+2];
         arr[0]= 1;
