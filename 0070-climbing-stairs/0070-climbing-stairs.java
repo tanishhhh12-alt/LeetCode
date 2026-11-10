@@ -6,15 +6,18 @@ class Solution {
 
     Arrays.fill(dp,-1);
 
-    if(n<=2){
+    if(n<=1){
         return dp[n] = n;
     }
+
+    dp[0] =1;
+    dp[1] =1;
 
     for(int i =2;i<=n;i++){
         dp[i] = dp[i-2] + dp[i-1];
     }
 
-    return Math.abs(dp[n]);
+    return dp[n];
 
        
     }
