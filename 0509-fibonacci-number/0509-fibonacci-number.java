@@ -27,6 +27,6 @@ class Solution {
         return dp[n];
        }
 
-        return dp[n] = fib(n-2) + fib(n-1);
+        return dp[n] = solve(n-2,dp) + solve(n-1,dp);
     }
 }
