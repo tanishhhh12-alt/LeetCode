@@ -3,25 +3,13 @@ class Solution {
 
         int[] dp = new int[cost.length+1];
         Arrays.fill(dp,-1);
+        dp[0] = cost[0];
+        dp[1] = cost[1];
         
-        
-        
-        return Math.min(solve(cost,0,dp),solve(cost,1,dp));
-    }
-
-    public int solve(int[] cost , int i,int[] dp){
-                if(i >= cost.length){
-                    return 0;
-            }
-            if(dp[i] != -1){
-                return dp[i];
-            }
-
-            int fs = cost[i] + solve(cost,i+1,dp);
-            int ss = cost[i] + solve(cost,i+2,dp);
-
-            return dp[i] = Math.min(fs,ss);
-
+        for(int i =2;i<cost.length;i++){
+            dp[i] = cost[i] + Math.min(dp[i-1],dp[i-2]);
+        }
+        return Math.min(dp[cost.length-1],dp[cost.length-2]);
 
     }
 }
