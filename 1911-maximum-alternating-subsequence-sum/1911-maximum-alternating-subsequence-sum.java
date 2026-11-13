@@ -2,9 +2,7 @@ class Solution {
     public long maxAlternatingSum(int[] nums) {
         int even = 0;
         long dp [][] = new long[nums.length+1][2];
-        for(long[] row : dp){
-             Arrays.fill(row,-1);
-         }
+       
          
          for(int i =1;i<nums.length+1;i++){
             
@@ -17,6 +15,6 @@ class Solution {
 
 
          }
-       return Math.max(dp[nums.length][0],dp[nums.length][1]) + 1;
+       return Math.max(dp[nums.length][0],dp[nums.length][1]);
     }
 }
