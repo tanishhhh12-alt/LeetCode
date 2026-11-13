@@ -4,31 +4,19 @@ class Solution {
         long dp [][] = new long[nums.length+1][2];
         for(long[] row : dp){
              Arrays.fill(row,-1);
-             }
-        
-        return solve(nums,0,even,dp);
-    }
+         }
+         
+         for(int i =1;i<nums.length+1;i++){
+            
+            dp[i][0] = Math.max(dp[i-1][1] - nums[i-1],dp[i-1][0]);
 
-    public long solve(int[] nums,int i,int even,long[][] dp){
-        if(i>=nums.length){
-            return 0;
-        }
+            dp[i][1] = Math.max(dp[i-1][0] + nums[i-1],dp[i-1][1]);
+          
 
-        if(dp[i][even] != -1){
-            return dp[i][even];
-        }
-        long et =0;
-        if(even == 0){
-            et = solve(nums,i+1,1,dp) + nums[i];
-        }else{
-            et = solve(nums,i+1,0,dp) - nums[i];
-        }
-
-        long nt = solve(nums,i+1,even,dp);
-
-        return dp[i][even] =  Math.max(et,nt);
-    
+          
 
 
+         }
+       return Math.max(dp[nums.length][0],dp[nums.length][1]) + 1;
     }
 }
