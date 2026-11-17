@@ -1,23 +1,25 @@
 class Solution {
     public int longestStrChain(String[] words) {
        Arrays.sort(words,(a,b)-> Integer.compare(a.length(),b.length()));
-       return solve(words,0,-1);
-    }
-    public int solve(String[] words,int i, int pi){
-        if(i>= words.length){
-            return 0;
-        }
-        int take =0;
-        int skip =0;
-        if(pi == -1 ||isprec(words[i],words[pi])){
-            take = 1+ solve(words,i+1,i);
-            skip = solve(words,i+1,pi);
-        }else{
-            skip = solve(words,i+1,pi);
-        }
-        return Math.max(take,skip);
-    }
+        int[] dp = new int[words.length +1];
 
+        Arrays.fill(dp,1);
+        int max =1;
+
+        for(int i =0;i<words.length;i++){
+            for(int j =0;j<i;j++){
+                if(words[i].length()  == words[j].length()+1 && isprec(words[i],words[j])){
+                    dp[i] = Math.max(dp[i],1+ dp[j]);
+                }
+                max = Math.max(max,dp[i]);
+            }
+        }
+        return max;
+    
+    
+    
+    
+    }
     boolean isprec(String ce,String pe){
         if(ce.length()  != pe.length() +1){
             return false;
