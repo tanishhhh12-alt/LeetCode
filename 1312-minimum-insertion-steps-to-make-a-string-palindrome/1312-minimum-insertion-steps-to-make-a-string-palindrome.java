@@ -1,28 +1,24 @@
 class Solution {
     public int minInsertions(String s) {
-        Integer[][] dp = new Integer[s.length() +1][s.length() +1];
+        int[][] dp = new int[s.length() +1][s.length() +1];
+        for(int[] row : dp){
+            Arrays.fill(row,0);
+        }
         String rev = new StringBuilder(s).reverse().toString();
         int n = s.length();
-        return n - lcs(s,rev,0,0,dp);
+        return n - lcs(s,rev,dp);
     }
 
-    public int lcs(String s,String rev,int i,int j, Integer[][] dp){
-        if(i == s.length() || j == rev.length()){
-            return 0;
+    public int lcs(String s,String rev, int[][] dp){
+      for(int i =1;i<=s.length();i++){
+        for(int j =1;j<=s.length();j++){
+            if(s.charAt(i-1) == rev.charAt(j-1)){
+                dp[i][j] = 1+ dp[i-1][j-1];
+            }else{
+                dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
+            }
         }
-
-        if(dp[i][j] != null){
-            return dp[i][j];
-        }
-
-        int take =0,skip =0;
-
-        if(s.charAt(i) == rev.charAt(j)){
-            take = 1 + lcs(s,rev,i+1,j+1,dp);
-        }else{
-            skip = Math.max(lcs(s,rev,i+1,j,dp),lcs(s,rev,i,j+1,dp));
-        }
-
-        return dp[i][j] = Math.max(take,skip);
+      }
+      return dp[s.length()][s.length()];
     }
 }
