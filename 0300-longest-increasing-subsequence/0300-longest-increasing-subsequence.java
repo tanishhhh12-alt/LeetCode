@@ -15,20 +15,12 @@ class Solution {
     }
 
     public int bs(ArrayList<Integer> ans,int target){
-       int left =0;
-       int right = ans.size()-1;
-       
-        while(left<=right){
-                int mid = (left + right)/2;
-                if(ans.get(mid) == target){
-                    return mid;
-                }else if(ans.get(mid)>target){
-                    right = mid-1;
-                }else{
-                    left = mid+1;
+       for(int i =0;i<ans.size();i++){
+        if(ans.get(i)>=target){
+            return i;
+        }
        }
-       }
-       return left;
+       return ans.size();
 
     }
 }
